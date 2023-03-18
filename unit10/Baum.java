@@ -38,10 +38,20 @@ public class Baum {
         bacon.addChild(new Baum("spam.txt"));
         root.addChild(new Baum("spam.txt"));
         return root;
+    
+        
+    }
+    static void printTree(Baum baum) {
+        System.out.println(baum.label);
+        for (Baum child : baum.children) {
+            printTree(child);
+        }
     }
 
     public static void main(String[] args) {
         Baum fsTree = filesystemTree();
+        printTree(fsTree);
+        
     }
 
 }
