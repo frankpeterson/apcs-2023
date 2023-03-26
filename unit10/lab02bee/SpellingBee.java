@@ -9,11 +9,39 @@ public class SpellingBee {
     private char[] letters;
     private char mustUse;
 
-    // TODO construct me!
+    public SpellingBee(char[] l, char m) {
+        letters = l;
+        mustUse = m;
+    }
 
     public boolean checkWord(String word) {
-        // TODO implement me!
-        return true;
+        boolean must = false;
+        boolean allChar = true;
+        char[] x = word.toCharArray();
+        for (int i = 0; i < x.length - 1; i++) {
+            if (x[i] == mustUse) {
+                must = true;
+            }
+            for (int b = 0; b < letters.length - 1; b++)
+                while (x[i] != letters[b]) {
+                    allChar = false;
+                }
+                
+
+        }
+
+        if (allChar == true && must == true) {
+            return true;
+        } else
+            return false;
+    }
+
+    public void printList(String[] word) {
+        for (int ia = 0; ia < 9894; ia++) {
+            if (checkWord(word[ia]) == true) {
+                System.out.println(word[ia]);
+            }
+        }
     }
 
     /**
@@ -40,11 +68,13 @@ public class SpellingBee {
         String[] words = loadFile("words_dropped.txt").split("\n");
         System.out.println("Loaded " + words.length + " words");
         // TODO solve me!
-        // SpellingBee bee = new SpellingBee("ranglty".toCharArray(), 'y');
+         SpellingBee bee = new SpellingBee("ranglty".toCharArray(), 'y');
+         bee.printList(words);
 
-        // TODO sort words!
+        // // TODO sort words!
 
-        // TODO what position in the sorted list is the word "search" ?
-
+        // // TODO what position in the sorted list is the word "search" ?
+        // linear search
+        
     }
 }
