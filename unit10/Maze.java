@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 public class Maze {
     private boolean solution;
     private char[][] maze;
-    private char checked;
 
     /**
      * Instantiates a Maze instance based on the provided arguments
@@ -61,11 +60,13 @@ public class Maze {
      * @param c current column index
      */
     private boolean check(int r, int c) {
-            if (r >= 0 && r < maze.length) {
-                if (c >= 0 && c < maze[r].length) {
-                    if (maze[r][c] != 'c') {
+        if (r >= 0 && r < maze.length) {
+            if (c >= 0 && c < maze[r].length) {
+                if (maze[r][c] != 'c') {
                     if (maze[r][c] != '#') {
-                        maze[r][c] = 'c';
+                        if (maze[r][c] != '$') {
+                            maze[r][c] = 'c';
+                        }
                         return true;
                     }
                 }
@@ -74,18 +75,17 @@ public class Maze {
         return false;
     }
 
-    public boolean explore(int r, int c) {
-        boolean a = true;
-            if (check(r, c) == true) {
-                if (maze[r][c] != '$') {
-                a = false;
+    public void explore(int r, int c) {
+        if (check(r, c) != false) {
+            if (maze[r][c] != '$') {
                 explore(r + 1, c);
                 explore(r - 1, c);
                 explore(r, c + 1);
                 explore(r, c - 1);
+            } else {
+                solution = true;
             }
         }
-        return a;
     }
 
     /**
@@ -94,21 +94,16 @@ public class Maze {
      * @return true if the maze has a path from Start (@) to End ($).
      */
     public boolean hasSolution() {
-        int ival = 0;
-        int kval = 0;
 
-    // for (int i = 0; i < maze.length; i++){
-    //     for (int k = 0; k < maze[i].length; k++){
-    //         if(maze[i][k] == '@'){
-    //             ival = i;
-    //             kval = k;
-    //         }
-    //     }
-    // }
-    
-        if (explore(ival, kval) == false)
-            return false;
-        return true;
+        String a = getStart();
+        int b = a.indexOf(" ");
+        String c = a.substring(0, b);
+        String d = a.substring(b + 1);
+        int e = Integer.valueOf(c);
+        int f = Integer.valueOf(d);
+
+        explore(e, f);
+        return solution;
 
     }
 
@@ -123,8 +118,8 @@ public class Maze {
         Maze example = new Maze(3, 3, "#.@.....$");
         check(example.hasSolution());
 
-    Maze case1 = new Maze(5, 7, ".#.#....#.#.##@.....$#...#.##..#...");
-    check(case1.hasSolution());
+        Maze case1 = new Maze(5, 7, ".#.#....#.#.##@.....$#...#.##..#...");
+        check(case1.hasSolution());
 
         Maze case2 = new Maze(4, 4, ".#.$.##..##.@..#");
         check(!case2.hasSolution());
@@ -144,7 +139,7 @@ public class Maze {
         test = new Maze(3, 3, "##@#.##.$");
         check(!test.hasSolution());
 
-        System.out.println("Happy Panda! \uD83D\uDC3C");
+        System.out.println("Happy Panda! " + Character.toString(0x1F43C));
 
     }
 

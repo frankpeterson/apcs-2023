@@ -17,28 +17,36 @@ public class SpellingBee {
     public boolean checkWord(String word) {
         boolean must = false;
         boolean allChar = true;
+
         char[] x = word.toCharArray();
-        for (int i = 0; i < x.length - 1; i++) {
+
+        for (int i = 0; i < x.length; i++) {
             if (x[i] == mustUse) {
                 must = true;
             }
-            for (int b = 0; b < letters.length - 1; b++)
-                while (x[i] != letters[b]) {
-                    allChar = false;
-                }
-                
+            boolean thisLetter = false;
+            for (int b = 0; b < letters.length; b++) {
+                if (x[i] == letters[b])
+                    thisLetter = true;
+            }
+            // int b = letters.length - 1;
+            // while (b >= 0) {
 
+            // b--;
+            // }
+            if (!thisLetter)
+                allChar = false;
         }
 
-        if (allChar == true && must == true) {
-            return true;
-        } else
-            return false;
+        return (allChar && must && x.length >= 4);
     }
 
     public void printList(String[] word) {
+        System.out.println("hi");
+
         for (int ia = 0; ia < 9894; ia++) {
-            if (checkWord(word[ia]) == true) {
+            // System.out.println(word[ia]);
+            if (checkWord(word[ia])) {
                 System.out.println(word[ia]);
             }
         }
@@ -68,13 +76,14 @@ public class SpellingBee {
         String[] words = loadFile("words_dropped.txt").split("\n");
         System.out.println("Loaded " + words.length + " words");
         // TODO solve me!
-         SpellingBee bee = new SpellingBee("ranglty".toCharArray(), 'y');
-         bee.printList(words);
+        SpellingBee bee = new SpellingBee("ranglty".toCharArray(), 'y');
+        bee.printList(words);
+        System.out.println("array:" + bee.checkWord("array"));
 
         // // TODO sort words!
 
         // // TODO what position in the sorted list is the word "search" ?
         // linear search
-        
+
     }
 }
