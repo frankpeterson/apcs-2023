@@ -1,3 +1,5 @@
+package unit10.lab02bee;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -25,15 +27,13 @@ public class SpellingBee {
                 must = true;
             }
             boolean thisLetter = false;
-            for (int b = 0; b < letters.length; b++) {
+
+            int b = letters.length - 1;
+            while (b >= 0) {
                 if (x[i] == letters[b])
                     thisLetter = true;
+                b--;
             }
-            // int b = letters.length - 1;
-            // while (b >= 0) {
-
-            // b--;
-            // }
             if (!thisLetter)
                 allChar = false;
         }
@@ -41,13 +41,10 @@ public class SpellingBee {
         return (allChar && must && x.length >= 4);
     }
 
-    public void printList(String[] word) {
-        System.out.println("hi");
-
-        for (int ia = 0; ia < 9894; ia++) {
-            // System.out.println(word[ia]);
-            if (checkWord(word[ia])) {
-                System.out.println(word[ia]);
+    public void printList(String[] words) {
+        for (int ia = 0; ia < words.length; ia++) {
+            if (checkWord(words[ia])) {
+                System.out.println(words[ia]);
             }
         }
     }
@@ -73,12 +70,12 @@ public class SpellingBee {
     }
 
     public static void main(String[] args) {
-        String[] words = loadFile("words_dropped.txt").split("\n");
+        // https://stackoverflow.com/questions/2163045/how-to-remove-line-breaks-from-a-file-in-java
+        String[] words = loadFile("unit10/lab02bee/words_dropped.txt").split(System.getProperty("line.separator"));
         System.out.println("Loaded " + words.length + " words");
         // TODO solve me!
         SpellingBee bee = new SpellingBee("ranglty".toCharArray(), 'y');
         bee.printList(words);
-        System.out.println("array:" + bee.checkWord("array"));
 
         // // TODO sort words!
 
