@@ -19,32 +19,29 @@ public class SpellingBee {
     public boolean checkWord(String word) {
         boolean must = false;
         boolean allChar = true;
-
         char[] x = word.toCharArray();
-
-        for (int i = 0; i < x.length; i++) {
+        for (int i = 0; i < x.length - 1; i++) {
             if (x[i] == mustUse) {
                 must = true;
             }
-            boolean thisLetter = false;
+            for (int b = 0; b < letters.length - 1; b++)
+                while (x[i] != letters[b]) {
+                    allChar = false;
+                }
+                
 
-            int b = letters.length - 1;
-            while (b >= 0) {
-                if (x[i] == letters[b])
-                    thisLetter = true;
-                b--;
-            }
-            if (!thisLetter)
-                allChar = false;
         }
 
-        return (allChar && must && x.length >= 4);
+        if (allChar == true && must == true) {
+            return true;
+        } else
+            return false;
     }
 
-    public void printList(String[] words) {
-        for (int ia = 0; ia < words.length; ia++) {
-            if (checkWord(words[ia])) {
-                System.out.println(words[ia]);
+    public void printList(String[] word) {
+        for (int ia = 0; ia < 9894; ia++) {
+            if (checkWord(word[ia]) == true) {
+                System.out.println(word[ia]);
             }
         }
     }
