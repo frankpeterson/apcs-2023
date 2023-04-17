@@ -13,8 +13,14 @@ public class StringFormatter {
      * only.
      */
     public static int totalLetters(List<String> wordList) {
-        // TODO part (a)
-        return -1; // replace me!
+       int count = 0;
+       for ( int i = 0; i < wordList.size(); i++ ){
+        String temp = wordList.get(i);
+        for ( int b = 0; b < temp.length(); b++ ){
+            count++;
+        }
+       }
+       return count;
     }
 
     /**
@@ -24,10 +30,12 @@ public class StringFormatter {
      * only.
      * formattedLen is large enough for all the words and gaps.
      */
-    public static int basicGapWidth(List<String> wordList,
-            int formattedLen) {
-        // TODO part (b)
-        return -1; // replace me!
+    public static int basicGapWidth(List<String> wordList, int formattedLen) {
+        int temp = totalLetters(wordList);
+        int ans = formattedLen - temp;
+        int a = wordList.size()-1;
+        ans = ans / a;
+        return ans;
     }
 
     /**
@@ -43,8 +51,20 @@ public class StringFormatter {
      * question.
      */
     public static String format(List<String> wordList, int formattedLen) {
-        // TODO part (c)
-        return ""; // replace me!
+        int leftover = leftoverSpaces(wordList, formattedLen);
+        int basicGapWidth = basicGapWidth(wordList, formattedLen);
+        String ans = wordList.get(0);
+        for ( int i = 1; i < wordList.size(); i++ ){
+            for ( int b = 0; b < basicGapWidth; b++){
+                ans += " ";
+            }
+            if ( leftover > 0 ){
+                ans += " ";
+                leftover--;
+            }
+            ans += wordList.get(i);
+        }
+        return ans; // replace me!
     }
 
     /**
