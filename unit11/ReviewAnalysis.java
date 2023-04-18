@@ -46,8 +46,11 @@ public class ReviewAnalysis {
      * No element of allReviews is null.
      */
     public double getAverageRating() {
-        /* to be implemented in part (a) */
-        return -1; // replace me!
+        int count = 0;
+        for ( int i = 0; i < allReviews.length; i++ ){
+            count +=allReviews[i].getRating();
+        }
+        return (double)count/allReviews.length;
     }
 
     /**
@@ -58,8 +61,15 @@ public class ReviewAnalysis {
      * Postcondition: allReviews is unchanged.
      */
     public ArrayList<String> collectComments() {
-        /* to be implemented in part (b) */
-        return null; // replace me!
+        ArrayList<String> ans = new ArrayList<String>();
+        for ( int i = 0; i < allReviews.length; i++ ){
+            String temp = allReviews[i].getComment();
+            if ( temp.contains("!")){
+                System.out.println(temp);
+                ans.add(i + "-" + temp);
+            }
+        }
+        return ans; 
     }
 
     public static void check(boolean test) throws AssertionError {
@@ -68,7 +78,7 @@ public class ReviewAnalysis {
     }
 
     public static void main(String[] args) {
-        Review[] reviews = { new Review(4, "Good! Thx"), new Review(3, "OK site"), new Review(5, "Great!"),
+        Review[] reviews = { new Review(4, "Good! Thx."), new Review(3, "OK site"), new Review(5, "Great!"),
                 new Review(2, "Poor! Bad."), new Review(3, "")
         };
         ReviewAnalysis analysis = new ReviewAnalysis(reviews);
