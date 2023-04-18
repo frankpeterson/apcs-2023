@@ -10,15 +10,33 @@ public class WordMatch {
     }
 
     public int scoreGuess(String guess) {
-        // TODO part a
-        return -1; // replace me!
-
+        int count = 0;
+        int guessLength = guess.length();
+        for ( int i = 0; i < secret.length()-guessLength+1; i++){
+            if ( secret.substring(i, i+guessLength).equals(guess)){
+                count++;
+            }
+        }
+        int ans = guessLength * guessLength * count;
+        return ans;
     }
 
     public String findBetterGuess(String guess1, String guess2) {
-        // TODO part b
-        return null; // replace me
-
+        int one = scoreGuess(guess1);
+        int two = scoreGuess(guess2);
+        if ( one > two ){
+            return guess1;
+        }
+        else if ( two > one){
+            return guess2;
+        }
+        else if ( two == one){
+            if ( guess1.compareTo(guess2) > 0){
+                return guess1;
+            }
+            else return guess2;
+        }
+        return "";
     }
 
     public static void parta1() {
