@@ -21,9 +21,18 @@ public class Data {
      * grid has at least one element.
      */
     public void repopulate() {
-        /* TODO to be implemented in part (a) */
-
-    }
+        int m = MAX;
+        for ( int r = 0; r < grid.length; r++){
+            for ( int c = 0; c < grid[r].length; c++ ){
+                int temp = (int)(Math.random()*m);
+                    while (temp % 10.0 != 0 || temp % 100 == 0){
+                    temp = (int)(Math.random()*m);
+                    }
+                    grid[r][c] = temp;
+                }
+            }
+        }
+    
 
     /**
      * Returns the number of columns in grid that are in increasing order, as
@@ -33,9 +42,21 @@ public class Data {
      * grid has at least one element.
      */
     public int countIncreasingCols() {
-        /* TODO to be implemented in part (b) */
+        
+        int ans = 0;
 
-        return -1; // replace me!
+        for ( int c = 0; c < grid[0].length; c++ ){
+            boolean incr = true;
+            for ( int r = 1; r < grid.length; r++){
+                if ( grid[r][c] < grid[r-1][c] && incr == true){
+                    incr = false;
+                }
+            }   
+            if ( incr == true){
+            ans++;
+        }
+    }
+        return ans; // replace me!
     }
 
     // There may be instance variables, constructors, and methods that are not
