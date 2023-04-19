@@ -33,8 +33,8 @@ public class ArrayResizer {
             if (isNonZeroRow(array2D, r)) {
                 for ( int c = 0; c < array2D[0].length; c++){
                     ans[rowCount][c] = array2D[r][c];
-                    rowCount++;
                     }
+                    rowCount++;
                 }
         }
         return ans; 
