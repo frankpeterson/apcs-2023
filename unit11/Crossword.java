@@ -49,7 +49,22 @@ public class Crossword {
      */
     public Crossword(boolean[][] blackSquares) {
         /* to be implemented in part (b) */
-
+        puzzle = new Square[blackSquares.length][blackSquares[0].length];
+        int count = 1; 
+        for ( int r = 0; r < puzzle.length; r++){
+            for (int c = 0; c < puzzle[0].length; c++){
+                if(toBeLabeled(r, c, blackSquares)){
+                    puzzle[r][c] = new Square(false, count);
+                    count++;
+                }
+                else if (blackSquares[r][c]){
+                    puzzle[r][c] = new Square(true, 0);
+                }
+                else {
+                    puzzle[r][c] = new Square ( false, 0);
+                }
+            }
+        }
     }
 
     /**
@@ -62,7 +77,16 @@ public class Crossword {
      */
     private boolean toBeLabeled(int r, int c, boolean[][] blackSquares) {
         /* to be implemented in part (a) */
-
+        if ( r == 0 || blackSquares[r-1][c]){
+            if (!blackSquares[r][c]){
+            return true;
+            }
+        }
+        if ( c == 0 || blackSquares[r][c-1]){
+            if (!blackSquares[r][c]){
+            return true;
+            }
+        }
         return false; // replace me!
     }
 

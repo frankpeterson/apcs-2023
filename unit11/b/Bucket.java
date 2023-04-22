@@ -40,18 +40,20 @@ public class Bucket {
     public static void main(String[] args) {
         // explore: predict before uncommenting
         int value = 3;
-        // value = 5;
-        System.out.println(value);
+        //value = 5;
+        //System.out.println(value);
 
         // System.out.println("Within method:");
         // updateValue(value);
         // System.out.println(value);
+        
+        // java passes objects as references, 
 
-        // System.out.println("Within bucket:");
-        // Bucket b = new Bucket(value);
-        // b.value = 5;
-        // updateValue(valueBucket);
-        // updateValueDirect(b);
-        // System.out.println(b.getValue());
+        System.out.println("Within bucket:");
+        Bucket b = new Bucket(value);
+        //b.value = 5;
+        updateValue(5);
+        updateValueDirect(b);
+        System.out.println(b.getValue());
     }
 }
