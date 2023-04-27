@@ -28,11 +28,11 @@ public class Bird {
         // System.out.println(num1 + ", " + num2);
 
         // what will recur do?
-        // recur(7);
+         recur(7);
     }
 
     private static void recur(int n) {
-        if (n != 0) {
+        if (n < 0) {
             recur(n - 2);
             System.out.print(n + " ");
         }
@@ -41,8 +41,14 @@ public class Bird {
     // precondition: arr is not empty, and may have negative values
     // https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-negative-number-topic/x0267d782:ordering-rational-numbers/a/ordering-negative-numbers
     private int smallest(int[] arr, int n) {
-        // return smallest value in arr less than n
-        // what is the smallest integer?
-        return n; // replace me
+        int ans = Integer.MAX_VALUE;
+        for ( int i = 0; i < arr.length; i++ ) {
+            if ( arr[i] < n ) {
+                if ( arr[i] < ans ) {
+                    ans = arr[i];
+                }
+            }
+        }
+        return ans; 
     }
 }
