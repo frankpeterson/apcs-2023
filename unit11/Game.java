@@ -65,8 +65,20 @@ public class Game {
      * part (a)
      */
     public int getScore() {
-        /* to be implemented in part (a) */
-        return -1; // delete me!
+        int score = 0;
+        if ( levelOne.goalReached() ){
+            if ( levelTwo.goalReached() ) {
+                if ( levelThree.goalReached() ) {
+                    score = levelThree.getPoints() + levelTwo.getPoints() + levelOne.getPoints();
+                }
+                else score = levelTwo.getPoints() + levelOne.getPoints();
+            }
+            else score = levelOne.getPoints();
+        }
+            if (isBonus()){
+                score *= 3;
+            }         
+        return score; // delete me!
     }
 
     /**
@@ -75,8 +87,15 @@ public class Game {
      * Precondition: num > 0
      */
     public int playManyTimes(int num) {
-        /* to be implemented in part (b) */
-        return -1; // delete me!
+        int record = 0;
+        for ( int i = 0; i < num; i++ ){
+            play();
+            int temp = getScore();
+            if ( temp > record){
+                record = temp;
+            }
+        }
+        return record; // delete me!
     }
 
     // There may be instance variables, constructors, and methods that are not

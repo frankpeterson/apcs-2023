@@ -43,13 +43,26 @@ public class ClubMembers {
     }
 
     public void addMembers(String[] names, int gradYear) {
-        // TODO a
+        for ( int i = 0; i < names.length; i++){
+            MemberInfo temp = new MemberInfo(names[i], gradYear, true)
+            members.add(temp);
+        }
 
     }
 
     public ArrayList<MemberInfo> removeMembers(int year) {
-        // TODO b;
-        return null; // replace me
+        ArrayList<MemberInfo> good = new ArrayList<MemberInfo>();
+        for ( int i = 0; i < members.size(); i++ ){
+            MemberInfo temp = members.get(i);
+            if ( temp.getGradYear() <= year ){
+                if ( temp.inGoodStanding() == true){
+                    good.add(temp);
+                }
+                members.remove(i);
+                i--;
+            }
+        }
+        return good; // replace me
     }
 
     public static void check(boolean test) throws AssertionError {

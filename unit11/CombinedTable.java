@@ -39,7 +39,28 @@ class SingleTable {
 
 public class CombinedTable {
 
-    // TODO: implement me!
+    private SingleTable a;
+    private SingleTable b;
+  
+
+    public CombinedTable(SingleTable a, SingleTable b){
+        this.a = a;
+        this.b = b;
+    }
+
+    public double getDesireability(){
+        if ( a.getHeight() == b.getHeight() ){
+            return (a.getViewQuality() + b.getViewQuality() )/2.0;
+        }
+        else return (a.getViewQuality() + b.getViewQuality() )/2.0 - 10;
+    }
+
+    public boolean canSeat(int c){
+        if ( c <= (a.getNumSeats()+b.getNumSeats()-2)){
+            return true;
+        }
+        return false;
+    }
 
     public static void check(boolean test) throws AssertionError {
         if (!test)
@@ -48,19 +69,19 @@ public class CombinedTable {
 
     public static void main(String[] args) {
         // uncomment block when ready to test. Select, then Ctrl+/
-        // SingleTable t1 = new SingleTable(4, 74, 60.0);
-        // SingleTable t2 = new SingleTable(8, 74, 70.0);
-        // SingleTable t3 = new SingleTable(12, 76, 75.0);
-        // CombinedTable c1 = new CombinedTable(t1, t2);
-        // check(c1.canSeat(9) == true);
-        // check(c1.canSeat(11) == false);
-        // check(c1.getDesireability() == 65.0);
-        // CombinedTable c2 = new CombinedTable(t2, t3);
-        // check(c2.canSeat(18));
-        // check(c2.getDesireability() == 62.5);
-        // t2.setViewQuality(80);
-        // check(c2.getDesireability() == 67.5);
-        // System.out.println("Happy Panda! \uD83D\uDC3C");
+        SingleTable t1 = new SingleTable(4, 74, 60.0);
+        SingleTable t2 = new SingleTable(8, 74, 70.0);
+        SingleTable t3 = new SingleTable(12, 76, 75.0);
+        CombinedTable c1 = new CombinedTable(t1, t2);
+        check(c1.canSeat(9) == true);
+        check(c1.canSeat(11) == false);
+        check(c1.getDesireability() == 65.0);
+        CombinedTable c2 = new CombinedTable(t2, t3);
+        check(c2.canSeat(18));
+        System.out.println((c2.getDesireability() == 62.5));
+        t2.setViewQuality(80);
+        check(c2.getDesireability() == 67.5);
+        System.out.println("Happy Panda! \uD83D\uDC3C");
 
     }
 
