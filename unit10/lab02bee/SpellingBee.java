@@ -71,10 +71,9 @@ public class SpellingBee {
         String[] words = loadFile("unit10/lab02bee/words_dropped.txt").split(System.getProperty("line.separator"));
         System.out.println("Loaded " + words.length + " words");
         // TODO solve me!
-        SpellingBee bee = new SpellingBee("ranglty".toCharArray(), 'y');
+        SpellingBee bee = new SpellingBee("ranglty".toCharArray(), 'a');
         bee.printList(words);
 
-        // // TODO sort words!
 
         // // TODO what position in the sorted list is the word "search" ?
         // linear search
