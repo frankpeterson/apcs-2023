@@ -4,7 +4,9 @@ import openpyxl
 
 client = RESTClient(config.API_KEY)
 
-ticker = "SPY"
+
+
+ticker = "BRK.A"
 info = client.get_aggs(ticker=ticker, multiplier=1, timespan="day", from_="2021-01-09", to="2023-05-31")
 
 # Create a new workbook and select the active sheet
@@ -15,8 +17,9 @@ sheet = workbook.active
 sheet["A1"] = "Open"
 sheet["B1"] = "Close"
 sheet["C1"] = "Day Change"
-sheet["D1"] = "Positive Days"
-sheet["E1"] = "Negative Days"
+sheet["D1"] = "Percent Change"
+sheet["E1"] = "Positive Days"
+sheet["F1"] = "Negative Days"
 
 pos = 0
 neg = 0
@@ -25,19 +28,14 @@ neg = 0
 for row, agg in enumerate(info, start=2):
     sheet.cell(row=row, column=1).value = agg.open
     sheet.cell(row=row, column=2).value = agg.close
-    
-    sheet.cell(row=row, column=3).value = "Same"
-    if agg.open > agg.close:
-       sheet.cell(row=row, column=3).value = "Negative"
-       neg+=1
-    if agg.open < agg.close:
-        sheet.cell(row=row, column=3).value = "Positive"
-        pos+=1
+    sheet.cell(row=row, column=3).value = agg.close-agg.open
 
-print("negative")
-print(neg)
-print("positive")
-print(pos)
+    if agg.open > agg.close:
+       neg+=1
+       sheet.cell(row=row, column=3)
+
+    if agg.open < agg.close:
+        pos+=1
 
 sheet.cell(row=2, column=4).value = pos
 sheet.cell(row=2, column=5).value = neg
